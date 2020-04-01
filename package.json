@@ -1,0 +1,46 @@
+{
+  "name": "jinge-wasm-utility",
+  "version": "0.0.1",
+  "description": "wasm utility for https://jinge.design",
+  "main": "lib/index.js",
+  "scripts": {
+    "start": "npm run dev",
+    "dev": "webpack-dev-server --config ./script/webpack.config.js",
+    "build": "npm run build-wasm && npm run build-web",
+    "build-web-dev": "webpack --config ./script/webpack.config.js",
+    "build-web": "rm -rf ./dist && PRODUCTION=true npm run build-web-dev",
+    "build-wasm": "npm run wasm-build && npm run wasm-bindgen && npm run wasm-opt",
+    "wasm-build": "cargo build --target wasm32-unknown-unknown --release ",
+    "wasm-bindgen": "rm -rf ./lib && wasm-bindgen --target bundler --out-dir ./lib ./target/wasm32-unknown-unknown/release/jinge_wasm_utility.wasm && node ./script/after-bindgen.js",
+    "wasm-opt": "cd ./lib && mv jinge_wasm_utility_bg.wasm jinge_wasm_utility_bg.old.wasm && wasm-opt -Os jinge_wasm_utility_bg.old.wasm -o jinge_wasm_utility_bg.wasm",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint '**/*.js'",
+    "fix-lint": "eslint --fix '**/*.js'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jinge-design/jinge-wasm-utility"
+  },
+  "keywords": [
+    "jinge-design",
+    "wasm"
+  ],
+  "author": "Yuhang Ge <abeyuhang@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-standard": "^14.1.1",
+    "eslint-plugin-import": "^2.19.1",
+    "eslint-plugin-node": "^11.0.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "precommit-hook": "^3.0.0",
+    "wasm-loader": "^1.3.0",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3"
+  },
+  "pre-commit": [
+    "lint"
+  ]
+}

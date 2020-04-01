@@ -1,0 +1,20 @@
+{
+  "env": {
+    "browser": true,
+    "es6": true
+  },
+  "extends": [
+    "standard"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "module"
+  },
+  "rules": {
+    "object-curly-newline": ["error", {
+      "minProperties": 1
+    }],
+    "space-before-function-paren": ["error", "never"],
+    "semi": ["error", "always"]
+  }
+}

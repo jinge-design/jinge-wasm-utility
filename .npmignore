@@ -1,0 +1,11 @@
+/target
+**/*.rs.bk
+Cargo.lock
+.cargo-ok
+wasm-pack.log
+node_modules
+.vscode/
+.jshintignore
+.jshintrc
+.tmp/
+lib/*.old.wasm
