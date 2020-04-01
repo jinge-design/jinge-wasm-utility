@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>test</title>
+    <base href="/dist/"/>
+  </head>
+  <body>
+    <script src="jinge-wasm-utility.min.js"></script>
+    <script>
+      (async () => {
+        const ab = new TextEncoder().encode(new Array(10).fill('Hello, World. 你好，世界！'));
+        const buf = await JingeWasmUtility.gzipEncode(ab);
+        console.log(ab.length, buf.length, ((ab.length - buf.length) / ab.length * 100).toFixed(2) + '%');
+        const str = new TextDecoder().decode(
+          await JingeWasmUtility.gzipDecode(buf)
+        );
+        console.log(str);
+      })().catch(err => {
+        console.error(err);
+      });
+    </script>
+  </body>
+</html>

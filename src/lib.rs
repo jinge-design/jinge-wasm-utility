@@ -1,6 +1,7 @@
 use flate2::Compression;
 use flate2::write::GzEncoder;
-use std::io::{Write};
+use flate2::read::GzDecoder;
+use std::io::{Read, Write};
 use wasm_bindgen::prelude::*;
 
 // When the `wee_alloc` feature is enabled, use `wee_alloc` as the global
@@ -23,12 +24,15 @@ fn set_panic_hook() {
 #[wasm_bindgen]
 pub fn gzip_encode(buffer: &[u8]) -> Vec<u8> {
   let mut e = GzEncoder::new(Vec::new(), Compression::best());
-  e.write_all(buffer).expect("could not compress");
-  let compressed_bytes = e.finish();
-  return compressed_bytes.unwrap();
+  e.write_all(buffer).expect("could not encode");
+  let output = e.finish();
+  return output.unwrap();
 }
 
 #[wasm_bindgen]
-pub fn test(buffer: &[u8]) -> usize {
-  return buffer.len();
+pub fn gzip_decode(buffer: &[u8]) -> Vec<u8> {
+  let mut d = GzDecoder::new(&buffer[..]);
+  let mut output = Vec::new();
+  d.read_to_end(&mut output).unwrap();
+  return output;
 }

@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "wasm utility for https://jinge.design",
   "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "scripts": {
     "start": "npm run dev",
     "dev": "webpack-dev-server --config ./script/webpack.config.js",
@@ -34,8 +35,8 @@
     "eslint-plugin-node": "^11.0.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
+    "file-loader": "^6.0.0",
     "precommit-hook": "^3.0.0",
-    "wasm-loader": "^1.3.0",
     "webpack": "^4.42.1",
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.10.3"

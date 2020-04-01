@@ -7,9 +7,21 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, '../dist'),
     filename: `jinge-wasm-utility.${isProd ? 'min.' : ''}js`,
-    chunkFilename: `jinge-wasm-utility.[hash].[name].${isProd ? 'min.' : ''}js`,
+    chunkFilename: `[hash].${isProd ? 'min.' : ''}js`,
     library: 'JingeWasmUtility',
     libraryTarget: 'umd'
+  },
+  module: {
+    rules: [{
+      test: /\.wasm$/,
+      type: 'javascript/auto', /** this disabled webpacks default handling of wasm */
+      use: [{
+        loader: 'file-loader',
+        options: {
+          name: '[hash].[ext]'
+        }
+      }]
+    }]
   },
   devServer: {
     publicPath: '/.tmp',
