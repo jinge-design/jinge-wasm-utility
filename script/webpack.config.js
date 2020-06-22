@@ -7,7 +7,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, '../dist'),
     filename: `jinge-wasm-utility.${isProd ? 'min.' : ''}js`,
-    chunkFilename: `[hash].${isProd ? 'min.' : ''}js`,
+    chunkFilename: `[contenthash].${isProd ? 'min.' : ''}js`,
     library: 'JingeWasmUtility',
     libraryTarget: 'umd'
   },
@@ -18,7 +18,7 @@ module.exports = {
       use: [{
         loader: 'file-loader',
         options: {
-          name: '[hash].[ext]'
+          name: '[contenthash].[ext]'
         }
       }]
     }]

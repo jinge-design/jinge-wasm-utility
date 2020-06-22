@@ -11,4 +11,5 @@ node_modules
 .jshintrc
 .tmp/
 dist/
+lib/jinge_wasm_utility_bg.js
 lib/*.old.wasm

@@ -29,7 +29,7 @@ function __init__() {
 fs.writeFileSync(
   _re('index.js'),
   fs.readFileSync(
-    _re('jinge_wasm_utility.js'), 'utf-8'
+    _re('jinge_wasm_utility_bg.js'), 'utf-8'
   ).replace(
     /^[\s\n\r]*import[^\n]+\n/, INIT_CODE
   ).replace(
